@@ -551,8 +551,6 @@ function bh_regex(src){
 }
 
 function bitf_regex(src){
-//http://brawlinthefamily.keenspot.com/2013/11/08/526-smash-voters-marth/
-//http://cdn.brawlinthefamily.keenspot.com/comics/2013-11-08-526-SmashVotersMarth.jpg
 	var re = new RegExp(/http:\/\/brawlinthefamily\.keenspot.com\/(\d{4})\/(\d{2})\/(\d{2})\/(\d+)-(.*)\//);
 	var match = re.exec(decodeURIComponent(src));
 	var panel = null;
