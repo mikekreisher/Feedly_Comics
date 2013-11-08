@@ -128,7 +128,6 @@ function get_extras(comic, item_body, link, metadata) {
 	switch (comic) {
 		case "ag":		// Abstruse Goose
 		case "bc":		// Boat Crime
-		case "bitf":	// Brawl in the Family
 		case "cil":		// Cowbirds in Love
 		case "dd":		// Doghouse Diaries
 		case "gsc":		// Gun Show Comics
@@ -180,6 +179,13 @@ function get_extras(comic, item_body, link, metadata) {
 			if(panel != null){
 				add_secrets(item_body, null, panel);
 			}
+			break;
+			
+		case "bitf":	// Brawl in the Family
+			var panel = bitf_regex(link);
+            if(panel != null){
+            	add_secrets(item_body, null, panel);
+            }
 			break;
 			
 		case "ch":		// Cyanide & Happiness
@@ -542,6 +548,22 @@ function bh_regex(src){
 		panel = "http://boxerhockey.fireball20xl.com/img/comic/" + match[1] + ".png";
 	}
     return panel;
+}
+
+function bitf_regex(src){
+//http://brawlinthefamily.keenspot.com/2013/11/08/526-smash-voters-marth/
+//http://cdn.brawlinthefamily.keenspot.com/comics/2013-11-08-526-SmashVotersMarth.jpg
+	var re = new RegExp(/http:\/\/brawlinthefamily\.keenspot.com\/(\d{4})\/(\d{2})\/(\d{2})\/(\d+)-(.*)\//);
+	var match = re.exec(decodeURIComponent(src));
+	var panel = null;
+	if(match != null){
+		var comic_title = "";
+		for each(var word in match[5].split('-')){
+			comic_title += capitalizeFirstLetter(word);
+		}
+		panel = "http://cdn.brawlinthefamily.keenspot.com/comics/" + match[1] + "-" + match[2] + "-" + match[3] + "-" + match[4] + "-" + comic_title + ".jpg";
+	}
+	return panel;
 }
 
 function crc_regex(src, str){
