@@ -722,7 +722,6 @@ function pt_regex(src, str){
         var month = get_month(date_match[2]);
     	panel = src_match[1] + "/comics/" + date_match[3] + "-" + month + "-" + pad((parseInt(date_match[1]) + 1), 2) + "-" + comic_title + ".jpg";
     }
-	alert(panel);
     return panel;
 }
 
