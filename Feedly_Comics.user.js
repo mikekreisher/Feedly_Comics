@@ -59,6 +59,7 @@ function is_comic(link) {
 		"http://www.stickycomics.com/"			          		: "sc",   // Sticky Comics
 		"http://www.twogag.com/"								: "tgag", // Two Guys and Guy
 		"http://vectorbelly.com/"								: "vb",	  // Vector Belly
+		"http://www.victimsofcircumsolar.com/"					: "voc",  // Victims of Circumsolar
         "http://www.weregeek.com/"								: "wg",	  // Weregeek
 		"http://xkcd.com/"                              		: "xkcd", // XKCD
         "http://www.zombieroomie.com/"							: "zr"	  // Zombie Roomie
@@ -390,6 +391,16 @@ function get_extras(comic, item_body, link, metadata) {
             title = $(img).attr("title");
 			if(panel != null){
 				add_secrets(item_body, title, panel);
+				img.hide();
+			}
+			break;
+			
+		case "voc":		// Victims of Circumsolar
+			img = $(item_body).find("img[src*='victimsofcircumsolar']");
+			src = $(img).attr("src");
+			var panel = voc_regex(src);
+			if(panel != null){
+				add_secrets(item_body, null, panel);
 				img.hide();
 			}
 			break;
@@ -778,6 +789,11 @@ function sp_regex(src){
 function tgag_regex(src){
     var panel = src.replace("comics-rss", "comics");
     return panel;
+}
+
+function voc_regex(src){
+	var panel = src.replace("-150x150", "");
+	return panel;
 }
 
 function wg_regex(src){
