@@ -31,6 +31,7 @@ function is_comic(link) {
 		"http://doctorkawaii.com/"								: "dk",	  // Doctor Kawaii
 		"http://thedoghousediaries.com"						    : "dd",   // Doghouse Diaries
 		"http://www.dumbingofage.com/"							: "doa",  // Dumbing of Age
+		"http://extrafabulouscomics.com/"						: "efc",  // Extra Fabulous Comics
 		"http://gunshowcomic.com/"                              : "gsc",  // Gun Show Comics
 		"http://hijinksensue.com/"								: "he",   // Hijinx Ensue
 		"http://www.geekculture.com/joyoftech/"                 : "jot",  // The Joy of Tech
@@ -232,6 +233,17 @@ function get_extras(comic, item_body, link, metadata) {
 			if (title && panel != null) {
 				add_secrets(item_body,title,panel);
 				img.hide();
+			}
+			break;
+			
+		case "efc":		// Extra Fabulous Comics
+			img = $(item_body).find("img[src*='extrafabulouscomics']");
+			src = $(img).attr("src");
+			var panel = src.replace('-150x150', '');
+			title = $(img).attr("alt");
+			if(panel != null){
+				$(img).hide();
+				add_secrets(item_body, title, panel);
 			}
 			break;
 			
