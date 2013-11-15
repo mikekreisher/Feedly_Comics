@@ -16,6 +16,7 @@ var extension = false;
 function is_comic(link) {
 
 	var comics = {
+		"http://3dbdotcom.com/"									: "3db",  // 3 Dollar Bill
 		"http://abstrusegoose.com/" 							: "ag",   // Abstruse Goose
 		"http://www.amazingsuperpowers.com/"            		: "asp",  // Amazing Super Powers
 		"http://www.anticscomic.com/"                   		: "ant",  // Antics Comic
@@ -146,6 +147,15 @@ function get_extras(comic, item_body, link, metadata) {
 			title = $(item_body).find("img").attr("title");
 			if (title) {
 				add_secrets(item_body,title,null);
+			}
+			break;
+			
+		case "3db":		// 3 Dollar Bill
+			var img = $(item_body).find("img");
+			var panel = img.attr("src").replace("-150x150", "");
+			if(panel != null){
+				$(img).hide();
+				add_secrets(item_body, null, panel);
 			}
 			break;
 			
